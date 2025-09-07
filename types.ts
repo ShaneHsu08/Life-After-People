@@ -72,6 +72,12 @@ export interface TranslationSet {
     privacyContent: LegalContentSection[];
     termsTitle: string;
     termsContent: LegalContentSection[];
+    genVideoScriptTitle: string;
+    genVideoScriptLoading: string;
+    genVideoScriptCopy: string;
+    genVideoScriptCopied: string;
+    genDownloadAll: string;
+    genZipping: string;
 }
 
 export interface Translations {

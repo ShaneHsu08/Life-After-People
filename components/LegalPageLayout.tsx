@@ -20,13 +20,13 @@ const LegalPageLayout: React.FC<LegalPageLayoutProps> = ({ title, content, onBac
                 </svg>
                 {backText}
             </button>
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-8 border-b border-gray-200 dark:border-gray-800 pb-4">
+            <h2 className="text-4xl md:text-5xl font-bold text-text-primary-light dark:text-text-primary-dark mb-8 border-b border-black/20 dark:border-white/20 pb-4 font-heading uppercase tracking-wider">
                 {title}
             </h2>
-            <div className="space-y-6 text-gray-700 dark:text-gray-300">
+            <div className="space-y-6 text-text-secondary-light dark:text-text-secondary-dark">
                 {content.map((section, index) => (
                     <div key={index}>
-                        <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-2">
+                        <h3 className="text-xl font-semibold text-text-primary-light dark:text-text-primary-dark mb-2 font-heading tracking-wide">
                             {section.heading}
                         </h3>
                         <p className="leading-relaxed">

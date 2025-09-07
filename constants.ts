@@ -51,6 +51,12 @@ export const translations: Translations = {
             { heading: '5. Disclaimer of Warranties', body: 'The Service is provided "as is" and "as available" without any warranties of any kind, express or implied. We do not warrant that the service will be uninterrupted, timely, secure, or error-free, nor do we make any warranty as to the results that may be obtained from the use of the service.' },
             { heading: '6. Limitation of Liability', body: 'In no event shall the creators of Life After People be liable for any direct, indirect, incidental, special, consequential or exemplary damages resulting from the use or the inability to use the service.' },
         ],
+        genVideoScriptTitle: 'Your Video Script',
+        genVideoScriptLoading: 'Generating video script...',
+        genVideoScriptCopy: 'Copy Script',
+        genVideoScriptCopied: 'Copied!',
+        genDownloadAll: 'Download All',
+        genZipping: 'Zipping...',
     },
     zh: {
         headerTitle: '人类消失后的世界',
@@ -102,6 +108,12 @@ export const translations: Translations = {
             { heading: '5. 免责声明', body: '本服务按“原样”和“现有”基础提供，不附带任何明示或暗示的保证。我们不保证服务不会中断、及时、安全或无错误，也不对使用服务可能获得的结果作任何保证。' },
             { heading: '6. 责任限制', body: '在任何情况下，“人类消失后的世界”的创建者均不对因使用或无法使用本服务而导致的任何直接、间接、偶然、特殊、后果性或惩戒性损害负责。' },
         ],
+        genVideoScriptTitle: '您的视频脚本',
+        genVideoScriptLoading: '正在生成视频脚本...',
+        genVideoScriptCopy: '复制脚本',
+        genVideoScriptCopied: '已复制！',
+        genDownloadAll: '下载全部',
+        genZipping: '压缩中...',
     },
     ja: {
         headerTitle: '人類滅亡後の世界',
@@ -153,5 +165,11 @@ export const translations: Translations = {
             { heading: '5. 保証の否認', body: '本サービスは「現状有姿」および「提供可能な範囲」で提供され、明示または黙示を問わず、いかなる種類の保証もありません。当社は、サービスが中断されないこと、タイムリーであること、安全であること、エラーがないこと、また、サービスの利用から得られる結果について、いかなる保証も行いません。' },
             { heading: '6. 責任の制限', body: 'いかなる場合においても、「人類滅亡後の世界」の作成者は、本サービスの使用または使用不能に起因する直接的、間接的、付随的、特別、結果的または懲罰的な損害について一切責任を負わないものとします。' },
         ],
+        genVideoScriptTitle: 'ビデオスクリプト',
+        genVideoScriptLoading: 'ビデオスクリプトを生成中...',
+        genVideoScriptCopy: 'スクリプトをコピー',
+        genVideoScriptCopied: 'コピーしました！',
+        genDownloadAll: 'すべてダウンロード',
+        genZipping: '圧縮中...',
     }
 };

@@ -1,6 +1,6 @@
 import React from 'react';
 
-const iconClasses = "w-6 h-6 text-gray-500 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white transition-colors";
+const iconClasses = "w-6 h-6 text-text-secondary-light dark:text-text-secondary-dark group-hover:text-accent dark:group-hover:text-accent-dark transition-colors";
 
 export const GithubIcon: React.FC = () => (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className={iconClasses}>

@@ -1,4 +1,3 @@
-
 import { GoogleGenAI, Modality } from "@google/genai";
 
 if (!process.env.API_KEY) {
@@ -44,5 +43,60 @@ export const generateFutureImage = async (
     } catch (error) {
         console.error("Gemini API request failed:", error);
         throw new Error("Failed to generate image. Please check the console for more details.");
+    }
+};
+
+export const analyzeImage = async (
+    imageData: { type: string; data: string }
+): Promise<string> => {
+    try {
+        const prompt = "Analyze this image and provide a brief, descriptive caption of its content. Focus on the main subject (e.g., 'a brick building', 'a bridge', 'a park with a fountain'), the setting (e.g., 'in a dense urban city', 'in a quiet suburban neighborhood', 'in a rural landscape'), and the overall atmosphere. Keep it to one sentence.";
+        const response = await ai.models.generateContent({
+            model: 'gemini-2.5-flash',
+            contents: {
+                parts: [
+                    {
+                        inlineData: {
+                            data: imageData.data,
+                            mimeType: imageData.type,
+                        },
+                    },
+                    {
+                        text: prompt,
+                    },
+                ],
+            },
+        });
+        return response.text.trim();
+    } catch (error) {
+        console.error("Gemini API request for image analysis failed:", error);
+        return ""; // Return empty string on failure
+    }
+};
+
+export const generateVideoScript = async (language: string, imageDescription: string | null): Promise<string> => {
+    const languageMap: { [key: string]: string } = {
+        en: 'English',
+        zh: 'Chinese',
+        ja: 'Japanese'
+    };
+    const targetLanguage = languageMap[language] || 'English';
+
+    const descriptionContext = imageDescription
+        ? `The scene is specifically: "${imageDescription}". The script should be tailored to this specific location.`
+        : "The script should be general enough to fit any kind of location.";
+
+    try {
+        const prompt = `You are a documentary scriptwriter. Write a compelling, dramatic voice-over script for a short video showing a single location as it decays over a million years after humans vanish. ${descriptionContext} The video will use six keyframes: 1 year, 100 years, 1,000 years, 10,000 years, 100,000 years, and 1 million years. Structure the script with scene descriptions for each keyframe (e.g., "[SCENE 1: 1 YEAR LATER]") and corresponding narration. The tone should be awe-inspiring, slightly melancholic, and educational, in the style of the 'Life After People' documentary series. Keep it concise, suitable for a short social media video. The script must be written in ${targetLanguage}.`;
+
+        const response = await ai.models.generateContent({
+            model: 'gemini-2.5-flash',
+            contents: prompt,
+        });
+
+        return response.text;
+    } catch (error) {
+        console.error("Gemini API request for script failed:", error);
+        throw new Error("Failed to generate video script.");
     }
 };

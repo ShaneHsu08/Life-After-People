@@ -73,17 +73,17 @@ const MapModal: React.FC<MapModalProps> = ({ onClose, onSelect, translations }) 
     };
 
     return (
-        <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 animate-fade-in">
-            <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-xl w-11/12 max-w-4xl h-5/6 flex flex-col p-4">
+        <div className="fixed inset-0 bg-black bg-opacity-80 backdrop-blur-sm flex items-center justify-center z-50 animate-fade-in">
+            <div className="bg-surface-light dark:bg-surface-dark rounded-2xl shadow-xl w-11/12 max-w-4xl h-5/6 flex flex-col p-4 border border-black/20 dark:border-white/20">
                 <div className="flex-shrink-0 text-center mb-4">
-                    <p className="text-gray-600 dark:text-gray-400">{translations.genMapInstruction}</p>
+                    <p className="text-text-secondary-light dark:text-text-secondary-dark">{translations.genMapInstruction}</p>
                 </div>
-                <div ref={mapRef} className="flex-grow w-full h-full rounded-lg bg-gray-200 dark:bg-gray-800"></div>
+                <div ref={mapRef} className="flex-grow w-full h-full rounded-lg bg-gray-200 dark:bg-gray-800 border border-black/20 dark:border-white/20"></div>
                 <div className="flex-shrink-0 flex items-center justify-center space-x-4 mt-4">
-                    <button onClick={onClose} className="bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 font-semibold py-2 px-6 rounded-full hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors">
+                    <button onClick={onClose} className="bg-surface-light dark:bg-surface-dark text-text-secondary-light dark:text-text-secondary-dark font-semibold py-2 px-6 border border-black/20 dark:border-white/20 rounded-full hover:bg-black/5 dark:hover:bg-white/10 transition-colors">
                         Cancel
                     </button>
-                    <button onClick={handleConfirm} className="bg-accent text-white font-bold py-2.5 px-8 rounded-full hover:opacity-90 transition-opacity">
+                    <button onClick={handleConfirm} className="bg-accent text-white font-bold py-2.5 px-8 rounded-full hover:bg-accent-dark transition-opacity font-heading uppercase tracking-wider">
                         {translations.genConfirmSelection}
                     </button>
                 </div>

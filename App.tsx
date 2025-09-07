@@ -87,7 +87,7 @@ const App: React.FC = () => {
     };
 
     return (
-        <div className="bg-white dark:bg-black text-gray-900 dark:text-gray-100 transition-colors duration-300">
+        <div className="bg-base-light dark:bg-base-dark text-text-primary-light dark:text-text-primary-dark transition-colors duration-300">
             <Header
                 language={language}
                 setLanguage={setLanguage}
