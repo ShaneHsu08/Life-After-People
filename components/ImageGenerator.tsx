@@ -262,7 +262,7 @@ const ImageGenerator: React.FC<ImageGeneratorProps> = ({ translations, language 
                                 <button
                                     onClick={handleCopyScript}
                                     disabled={isCopied}
-                                    className="absolute top-3 right-3 bg-surface-light dark:bg-surface-dark text-text-secondary-light dark:text-text-secondary-dark hover:bg-black/5 dark:hover:bg-white/10 border border-black/20 dark:border-white/20 font-semibold py-1 px-3 text-xs rounded-full transition-colors disabled:opacity-50"
+                                    className="absolute top-6 right-6 bg-surface-light dark:bg-surface-dark text-text-secondary-light dark:text-text-secondary-dark hover:bg-black/5 dark:hover:bg-white/10 border border-black/20 dark:border-white/20 font-semibold py-1 px-3 text-xs rounded-full transition-colors disabled:opacity-50"
                                 >
                                     {isCopied ? translations.genVideoScriptCopied : translations.genVideoScriptCopy}
                                 </button>

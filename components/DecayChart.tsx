@@ -14,7 +14,7 @@ const chartData = [
     { wood: 20, steel: 80, stone: 100 }, // 100 Years
     { wood: 0, steel: 25, stone: 99 },  // 1k Years
     { wood: 0, steel: 5, stone: 95 },   // 10k Years
-    { wood: 0, steel: 1, stone: 80 },    // 100k Years
+    { wood: 0, steel: 1, stone: 85 },    // 100k Years
     { wood: 0, steel: 0, stone: 60 },    // 1M Years
     { wood: 0, steel: 0, stone: 20 },     // 10M Years
     { wood: 0, steel: 0, stone: 5 },     // 100M Years

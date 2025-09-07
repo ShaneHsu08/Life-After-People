@@ -7,7 +7,6 @@ interface HeroProps {
 
 const Hero: React.FC<HeroProps> = ({ translations }) => {
     const heroStyle = {
-        //backgroundImage: "url('https://images.unsplash.com/photo-1504918737527-366b45a0f5a7?q=80&w=2070&auto=format&fit=crop')",
         backgroundImage: "url('/assets/hero-background.jpg')",
     };
 
