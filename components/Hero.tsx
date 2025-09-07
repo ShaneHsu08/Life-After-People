@@ -6,17 +6,17 @@ interface HeroProps {
 }
 
 const Hero: React.FC<HeroProps> = ({ translations }) => {
-    const heroStyle = {
-        backgroundImage: "url('/assets/hero-background.jpg')",
-    };
-
     return (
         <section 
-            style={heroStyle}
-            className="relative text-center py-24 md:py-40 flex items-center justify-center min-h-[60vh] rounded-2xl overflow-hidden mb-16 bg-cover bg-center"
+            className="relative text-center py-24 md:py-40 flex items-center justify-center min-h-[60vh] rounded-2xl overflow-hidden mb-16"
         >
+            <div 
+                className="absolute inset-0 bg-cover bg-center animate-kenburns"
+                style={{ backgroundImage: "url('/assets/hero-background.jpg')" }}
+                aria-hidden="true"
+            ></div>
             <div className="absolute inset-0 bg-black/60"></div>
-            <div className="relative z-10 p-4">
+            <div className="relative z-10 p-4 animate-fade-in">
                 <h2 className="text-4xl md:text-7xl font-bold tracking-widest text-white mb-4 uppercase font-heading">
                     {translations.mainTitle}
                 </h2>

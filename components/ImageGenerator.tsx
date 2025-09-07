@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useRef, useEffect } from 'react';
 import JSZip from 'jszip';
 import { generateFutureImage, generateVideoScript, analyzeImage } from '../services/geminiService';
 import type { TranslationSet, Language } from '../types';
@@ -22,6 +22,30 @@ const ImageGenerator: React.FC<ImageGeneratorProps> = ({ translations, language 
     const [isCopied, setIsCopied] = useState<boolean>(false);
     const [imageDescription, setImageDescription] = useState<string | null>(null);
     const [isZipping, setIsZipping] = useState<boolean>(false);
+    const [isVisible, setIsVisible] = useState(false);
+    const sectionRef = useRef<HTMLElement>(null);
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            (entries) => {
+                if (entries[0].isIntersecting) {
+                    setIsVisible(true);
+                    observer.unobserve(entries[0].target);
+                }
+            },
+            { threshold: 0.1 }
+        );
+    
+        if (sectionRef.current) {
+            observer.observe(sectionRef.current);
+        }
+    
+        return () => {
+            if (sectionRef.current) {
+                observer.unobserve(sectionRef.current);
+            }
+        };
+    }, []);
 
     const analyzeUploadedImage = async (imageData: { type: string; data: string }) => {
         try {
@@ -184,7 +208,7 @@ const ImageGenerator: React.FC<ImageGeneratorProps> = ({ translations, language 
     };
 
     const ActionButton: React.FC<{ onClick?: () => void; children: React.ReactNode; as?: 'label'; htmlFor?: string; }> = ({ onClick, children, as, htmlFor }) => {
-        const commonClasses = "cursor-pointer bg-surface-light dark:bg-surface-dark text-text-secondary-light dark:text-text-secondary-dark font-semibold py-2 px-6 border border-black/20 dark:border-white/20 rounded-full hover:bg-black/5 dark:hover:bg-white/10 hover:border-black/40 dark:hover:border-white/40 transition-colors text-center";
+        const commonClasses = "cursor-pointer bg-surface-light dark:bg-surface-dark text-text-secondary-light dark:text-text-secondary-dark font-semibold py-2 px-6 border border-black/20 dark:border-white/20 rounded-full hover:bg-black/5 dark:hover:bg-white/10 hover:border-black/40 dark:hover:border-white/40 transition-all duration-300 transform hover:scale-105 text-center";
         if (as === 'label') {
             return <label htmlFor={htmlFor} className={commonClasses}>{children}</label>;
         }
@@ -192,7 +216,11 @@ const ImageGenerator: React.FC<ImageGeneratorProps> = ({ translations, language 
     };
 
     return (
-        <section id="image-generation-section" className="mb-16 bg-surface-light dark:bg-surface-dark p-6 md:p-8 rounded-2xl border border-black/10 dark:border-white/10 shadow-lg">
+        <section
+            ref={sectionRef}
+            id="image-generation-section"
+            className={`mb-16 p-6 md:p-8 rounded-2xl border border-black/10 dark:border-white/10 shadow-lg bg-gradient-to-br from-surface-light to-gray-100 dark:from-surface-dark dark:to-gray-800 bg-[length:200%_200%] animate-gradient-shift transition-all duration-1000 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
+        >
             <h3 className="text-3xl font-bold text-center mb-2 font-heading uppercase tracking-wider">{translations.genTitle}</h3>
             <p className="text-center text-text-secondary-light dark:text-text-secondary-dark mb-4 max-w-2xl mx-auto">
                 {translations.genSubtitle}
@@ -224,7 +252,7 @@ const ImageGenerator: React.FC<ImageGeneratorProps> = ({ translations, language 
                 <button
                     onClick={handleGenerateClick}
                     disabled={!uploadedImageData || isLoading || isGeneratingScript}
-                    className="bg-accent text-white font-bold py-3 px-10 rounded-full hover:bg-accent-dark disabled:bg-gray-500 dark:disabled:bg-gray-700 disabled:cursor-not-allowed transition-colors flex items-center justify-center space-x-2 min-w-[200px] text-lg uppercase tracking-wider font-heading"
+                    className={`bg-accent text-white font-bold py-3 px-10 rounded-full hover:bg-accent-dark disabled:bg-gray-500 dark:disabled:bg-gray-700 disabled:cursor-not-allowed transition-colors flex items-center justify-center space-x-2 min-w-[200px] text-lg uppercase tracking-wider font-heading ${uploadedImageData && !isLoading && !isGeneratingScript ? 'animate-pulse-subtle' : ''}`}
                 >
                     {(isLoading || isGeneratingScript) && <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>}
                     <span>{isLoading ? translations.genLoading : translations.genButton}</span>
