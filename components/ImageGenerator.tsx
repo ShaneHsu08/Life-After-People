@@ -141,7 +141,7 @@ const ImageGenerator: React.FC<ImageGeneratorProps> = ({ translations, language 
     }, [uploadedImageData, translations, language, imageDescription]);
     
     const handleDownloadAll = async () => {
-        if (generatedImages.length === 0 || !videoScript) return;
+        if (generatedImages.length === 0 || !videoScript || !uploadedImageData) return;
 
         setIsZipping(true);
         setError(null);
@@ -151,6 +151,11 @@ const ImageGenerator: React.FC<ImageGeneratorProps> = ({ translations, language 
 
             // Add script file
             zip.file("script.txt", videoScript);
+
+            // Add original image file
+            const extension = uploadedImageData.type.split('/')[1] || 'png';
+            const originalFileName = `original_image.${extension}`;
+            zip.file(originalFileName, uploadedImageData.data, { base64: true });
 
             // Add image files
             for (let i = 0; i < generatedImages.length; i++) {

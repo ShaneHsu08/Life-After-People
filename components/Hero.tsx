@@ -6,11 +6,6 @@ interface HeroProps {
 }
 
 const Hero: React.FC<HeroProps> = ({ translations }) => {
-    // To use your own local image:
-    // 1. Create an 'assets' folder in the root of your project.
-    // 2. Place your image inside, for example: 'hero-background.jpg'.
-    // 3. Then, comment out the line below that starts with `backgroundImage: "url('https://images..."`
-    // 4. And uncomment the line below that starts with `// backgroundImage: "url('/assets..."`
     const heroStyle = {
         //backgroundImage: "url('https://images.unsplash.com/photo-1504918737527-366b45a0f5a7?q=80&w=2070&auto=format&fit=crop')",
         backgroundImage: "url('/assets/hero-background.jpg')",
