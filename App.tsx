@@ -7,11 +7,14 @@ import ImageGenerator from './components/ImageGenerator';
 import DecayChart from './components/DecayChart';
 import Timeline from './components/Timeline';
 import Footer from './components/Footer';
+import PrivacyPolicy from './components/PrivacyPolicy';
+import TermsOfUse from './components/TermsOfUse';
 
 const App: React.FC = () => {
     const [theme, setTheme] = useState<'light' | 'dark'>('light');
     const [language, setLanguage] = useState<Language>('en');
     const [activeSection, setActiveSection] = useState<string>('year');
+    const [page, setPage] = useState<'main' | 'privacy' | 'terms'>('main');
 
     useEffect(() => {
         const storedTheme = localStorage.getItem('theme');
@@ -32,7 +35,13 @@ const App: React.FC = () => {
         }
     }, [theme]);
 
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [page]);
+
     const handleScroll = useCallback(() => {
+        if (page !== 'main') return;
+
         const sections = ['year', 'century', 'millennium', 'future'];
         const scrollPosition = window.scrollY + window.innerHeight / 3;
 
@@ -44,7 +53,7 @@ const App: React.FC = () => {
             }
         }
         setActiveSection(currentSection);
-    }, []);
+    }, [page]);
 
     useEffect(() => {
         window.addEventListener('scroll', handleScroll, { passive: true });
@@ -57,6 +66,25 @@ const App: React.FC = () => {
     };
 
     const currentTranslations = useMemo(() => translations[language], [language]);
+    
+    const renderContent = () => {
+        switch(page) {
+            case 'privacy':
+                return <PrivacyPolicy translations={currentTranslations} onBack={() => setPage('main')} />;
+            case 'terms':
+                return <TermsOfUse translations={currentTranslations} onBack={() => setPage('main')} />;
+            case 'main':
+            default:
+                return (
+                    <>
+                        <Hero translations={currentTranslations} />
+                        <ImageGenerator translations={currentTranslations} language={language} />
+                        <DecayChart translations={currentTranslations} theme={theme} activeSection={activeSection} />
+                        <Timeline translations={currentTranslations} />
+                    </>
+                );
+        }
+    };
 
     return (
         <div className="bg-white dark:bg-black text-gray-900 dark:text-gray-100 transition-colors duration-300">
@@ -69,12 +97,9 @@ const App: React.FC = () => {
                 activeSection={activeSection}
             />
             <main className="container mx-auto p-4 md:p-8">
-                <Hero translations={currentTranslations} />
-                <ImageGenerator translations={currentTranslations} language={language} />
-                <DecayChart translations={currentTranslations} theme={theme} activeSection={activeSection} />
-                <Timeline translations={currentTranslations} />
+                {renderContent()}
             </main>
-            <Footer translations={currentTranslations} />
+            <Footer translations={currentTranslations} setPage={setPage} />
         </div>
     );
 };

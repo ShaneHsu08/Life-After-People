@@ -12,6 +12,11 @@ export interface TimelineSectionData {
     events: TimelineEvent[];
 }
 
+export interface LegalContentSection {
+    heading: string;
+    body: string;
+}
+
 export interface TranslationSet {
     headerTitle: string;
     navYear: string;
@@ -23,6 +28,8 @@ export interface TranslationSet {
     chartTitle: string;
     chartSubtitle: string;
     footerText: string;
+    footerPrivacy: string;
+    footerTerms: string;
     chartYAxis: string;
     chartLabels: string[];
     chartDatasetWood: string;
@@ -60,6 +67,11 @@ export interface TranslationSet {
         millennium: TimelineSectionData;
         future: TimelineSectionData;
     };
+    backToHome: string;
+    privacyTitle: string;
+    privacyContent: LegalContentSection[];
+    termsTitle: string;
+    termsContent: LegalContentSection[];
 }
 
 export interface Translations {
