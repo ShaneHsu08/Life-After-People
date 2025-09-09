@@ -13,7 +13,7 @@ declare const google: any;
 const MapModal: React.FC<MapModalProps> = ({ onClose, onSelect, translations }) => {
     const mapRef = useRef<HTMLDivElement>(null);
     const panoramaRef = useRef<any>(null);
-    const apiKey = 'AIzaSyAT7p0xVIc_vmIPuhAF5ZV8z3zXzc4O-e8';
+    const apiKey = process.env.GOOGLE_MAPS_API_KEY;
 
     const setupMap = useCallback((position: { lat: number; lng: number }) => {
         if (!mapRef.current || !(window as any).google) return;
