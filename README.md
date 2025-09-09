@@ -1,7 +1,7 @@
 # Life After People: An Interactive Timeline
 
 <div align="center">
-  <img width="1200" height="475" alt="Life After People Banner" src="./assets/hero-background.jpg" />
+  <img width="1200" height="475" alt="Life After People Banner" src="./assets/lap_screenshot.jpg" />
 </div>
 
 ## 🌍 Overview
